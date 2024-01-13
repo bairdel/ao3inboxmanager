@@ -1,0 +1,17 @@
+name: 'sort completed fics'
+on: workflow_dispatch
+
+jobs:
+    pythonJob:
+        name: pythonFile
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - name: runfile
+          env:
+            USERNAME: ${{ secrets.USERNAME }}
+            PASSWORD: ${{ secrets.PASSWORD }}
+          run: |
+            python.exe .\sortCompletedFics.py "%USERNAME%" "%PASSWORD%"
+
+    

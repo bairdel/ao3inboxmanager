@@ -3,9 +3,8 @@ import imaplib
 import email
 from email.header import decode_header
 from collections import Counter
-import progressbar
-import re
 from alive_progress import alive_bar
+import sys
 
 
 def pickFolder(folders, message):
@@ -141,5 +140,6 @@ def sortCompletedFics(username, password):
     imap.logout()
 
 
-if __name__ == "__main__":
-    sortCompletedFics(username, password)
+# if __name__ == "__main__":
+#     sortCompletedFics(username, password)
+sortCompletedFics(sys.argv[1], sys.argv[2])
