@@ -1,5 +1,8 @@
 name: 'sort completed fics'
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+    schedule: ## Schedule the job to run at 12.am daily.
+        - cron: '0 8 * * *'
 
 jobs:
     pythonJob:
