@@ -1,4 +1,3 @@
-from keys import username, password
 import imaplib
 import email
 from email.header import decode_header
@@ -141,5 +140,8 @@ def sortCompletedFics(username, password):
 
 
 # if __name__ == "__main__":
+    # from keys import username, password
 #     sortCompletedFics(username, password)
+    
+    
 sortCompletedFics(sys.argv[1], sys.argv[2])
