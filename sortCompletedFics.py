@@ -19,6 +19,9 @@ def sortCompletedFics(username, password):
     imap_server = "imap.mail.yahoo.com"
     # create an IMAP4 class with SSL 
     imap = imaplib.IMAP4_SSL(imap_server)
+
+    print(username)
+    print(password)
     # authenticate
     imap.login(username, password)
 
