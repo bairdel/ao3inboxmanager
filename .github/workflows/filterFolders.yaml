@@ -12,6 +12,7 @@ jobs:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
           run: |
-            .\sortCompletedFics.py "%USERNAME%" "%PASSWORD%"
+            python .\sortCompletedFics.py "%USERNAME%" "%PASSWORD%"
+            shell: sh
 
     
