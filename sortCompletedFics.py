@@ -68,7 +68,10 @@ def sortCompletedFics(username, password):
         messages = int(messages[0])
 
         # number of top emails to fetch
-        N = 50
+        if messages < 50:
+            N = messages
+        else:
+            N = 50
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):
