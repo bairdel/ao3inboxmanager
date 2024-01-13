@@ -1,7 +1,6 @@
 import imaplib
 import email
 from email.header import decode_header
-from collections import Counter
 from alive_progress import alive_bar
 import sys
 
@@ -143,5 +142,5 @@ def sortCompletedFics(username, password):
     # from keys import username, password
 #     sortCompletedFics(username, password)
     
-    
+
 sortCompletedFics(sys.argv[1], sys.argv[2])

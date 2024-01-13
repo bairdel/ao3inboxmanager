@@ -7,10 +7,16 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v4
+        - uses: actions/setup-python@v1
+        - uses: BSFishy/pip-action@v1
+          with:
+            packages: |
+              alive_progress
         - name: runfile
           env:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
+            
           run: |
             python sortCompletedFics.py "%USERNAME%" "%PASSWORD%"
             shell: sh
