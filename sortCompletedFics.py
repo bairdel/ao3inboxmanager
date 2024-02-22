@@ -54,7 +54,16 @@ def sortCompletedFics(username, password):
                         ['"Merlin/Merlin WIPs"','"Merlin"'],
                         ['"The Untamed"','"The Untamed/The Untamed Finished"'],
                         ['"The Untamed/Untamed WIPs"','"The Untamed/The Untamed Finished"'],
-                        ['"Others"','"Others/Others Finished"']]
+                        ['"Others"','"Others/Others Finished"'],
+                        ['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"'],
+                        ['"Marvel"','"Marvel/Marvel Finished"'],
+                        ['"Marvel/Marvel WIPs"','"Marvel/Marvel Finished"'],
+                        ['"DSMP"','"DSMP/DSMP Finished"'],
+                        ['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"'],
+                        ['"Good Omens"','"Good Omens/Good Omens Finished"'],
+                        ['"Danny Phantom"','"Danny Phantom/Danny Phantom Finished"']]
+    
+    # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
     
 
     for k in range(len(inboxMovements)):
@@ -71,7 +80,7 @@ def sortCompletedFics(username, password):
         if messages < 50:
             N = messages
         else:
-            N = 50
+            N = messages
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):
@@ -145,7 +154,7 @@ def sortCompletedFics(username, password):
 
 
 # if __name__ == "__main__":
-    # from keys import username, password
+#     from keys import username, password
 #     sortCompletedFics(username, password)
     
 
