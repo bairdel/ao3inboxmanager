@@ -15,7 +15,7 @@ jobs:
           with:
             packages: |
               alive_progress
-              progressbar
+              progressbar2
         - name: runfile
           env:
             USERNAME: ${{ secrets.USERNAME }}
