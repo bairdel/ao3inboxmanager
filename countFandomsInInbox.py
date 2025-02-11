@@ -2,7 +2,7 @@ import imaplib
 import email
 from email.header import decode_header
 from collections import Counter
-import progressbar
+# import progressbar
 import csv
 import datetime
 import sys
@@ -29,16 +29,16 @@ def countFandomsInInbox(username, password):
     # print(imap.list())
 
 
-    widgets = [' [',
-            progressbar.Timer(format= 'elapsed time: %(elapsed)s'),
-            '] ',
-            progressbar.Bar('*'),' (',
-            progressbar.ETA(), ') ',
-            ]
+    # widgets = [' [',
+    #         progressbar.Timer(format= 'elapsed time: %(elapsed)s'),
+    #         '] ',
+    #         progressbar.Bar('*'),' (',
+    #         progressbar.ETA(), ') ',
+    #         ]
     
     # bar = progressbar.ProgressBar(max_value=N, 
     #                               widgets=widgets).start()
-    bar = progressbar.ProgressBar(maxval=N).start()
+    # bar = progressbar.ProgressBar(maxval=N).start()
 
     fandoms = []
 
@@ -90,7 +90,7 @@ def countFandomsInInbox(username, password):
                                     #print(fandom)
                                         fandoms.append(fandom[h].lstrip(" and "))
                                     count += 1
-                                    bar.update(count)
+                                    # bar.update(count)
                                 except:
                                     print(body)
                                     pass
