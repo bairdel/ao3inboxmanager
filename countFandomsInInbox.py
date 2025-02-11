@@ -5,7 +5,8 @@ from collections import Counter
 import progressbar
 import csv
 import datetime
-from keys import username, password
+import sys
+# from keys import username, password
 
 def countFandomsInInbox(username, password):
 
@@ -115,11 +116,12 @@ def countFandomsInInbox(username, password):
         print(k + " : " + str(v))
 
     date = datetime.date.today().strftime('%Y-%m-%d')
-    with open(date + ' fandoms.csv', 'w', newline="", encoding='utf-8') as csvfile:
-        z = csv.writer(csvfile)
-        for new_k, new_v in od.items():
-            z.writerow([new_k, new_v])
+    # with open(date + ' fandoms.csv', 'w', newline="", encoding='utf-8') as csvfile:
+    #     z = csv.writer(csvfile)
+    #     for new_k, new_v in od.items():
+    #         z.writerow([new_k, new_v])
     # print(od)
             
-if __name__ == "__main__":
-    countFandomsInInbox(username, password)
+# if __name__ == "__main__":
+#     countFandomsInInbox(username, password)
+countFandomsInInbox(sys.argv[1], sys.argv[2])
