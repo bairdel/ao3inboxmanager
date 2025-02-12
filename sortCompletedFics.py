@@ -20,8 +20,8 @@ def sortCompletedFics(username, password):
     # create an IMAP4 class with SSL 
     imap = imaplib.IMAP4_SSL(imap_server)
 
-    print(username)
-    print(password)
+    # print(username)
+    # print(password)
     # authenticate
     imap.login(username, password)
 
