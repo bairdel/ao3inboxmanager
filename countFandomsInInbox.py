@@ -4,7 +4,6 @@ from email.header import decode_header
 from collections import Counter
 import progressbar
 import csv
-from alive_progress import alive_bar
 import datetime
 import sys
 # from keys import username, password
@@ -30,86 +29,81 @@ def countFandomsInInbox(username, password):
     # print(imap.list())
 
 
-    # widgets = [' [',
-    #         progressbar.Timer(format= 'elapsed time: %(elapsed)s'),
-    #         '] ',
-    #         progressbar.Bar('*'),' (',
-    #         progressbar.ETA(), ') ',
-    #         ]
+    widgets = [' [',
+            progressbar.Timer(format= 'elapsed time: %(elapsed)s'),
+            '] ',
+            progressbar.Bar('*'),' (',
+            progressbar.ETA(), ') ',
+            ]
     
-    # bar = progressbar.ProgressBar(max_value=N, 
-    #                               widgets=widgets).start()
-    # bar = progressbar.ProgressBar(maxval=N).start()
+    bar = progressbar.ProgressBar(max_value=N, 
+                                  widgets=widgets).start()
+    bar = progressbar.ProgressBar(maxval=N).start()
 
     fandoms = []
 
     count = 0
-    with alive_bar(N, title=("Index Fandoms")) as bar:
+    
+    for i in range(messages, messages-N, -1):
 
-        for i in range(messages, messages-N, -1):
 
-
-            # fetch the email message by ID
-            res, msg = imap.fetch(str(i), "BODY.PEEK[]")
-            for response in msg:
-                if isinstance(response, tuple):
-                    # parse a bytes email into a message object
-                    msg = email.message_from_bytes(response[1])
-                    # decode the email subject
-                    subject, encoding = decode_header(msg["Subject"])[0]
-                    if isinstance(subject, bytes):
-                        # if it's a bytes, decode to str
-                        subject = subject.decode(encoding)
-                    # decode email sender
-                    From, encoding = decode_header(msg.get("From"))[0]
-                    if isinstance(From, bytes):
-                        From = From.decode(encoding)
-                    # print("Subject:", subject)
-                    # print("From:", From)
-                    # if the email message is multipart
-                    if From == "Archive of Our Own <do-not-reply@archiveofourown.org>":
-                        if msg.is_multipart():
-                            # iterate over email parts
-                            for part in msg.walk():
-                                # extract content type of email
-                                content_type = part.get_content_type()
-                                content_disposition = str(part.get("Content-Disposition"))
-                                try:
-                                    # get the email body
-                                    body = part.get_payload(decode=True).decode()
-                                except:
-                                    pass
-                                if content_type == "text/plain" and "attachment" not in content_disposition:
-                                    # print text/plain emails and skip attachments
-                                    try:
-                                        body = body.split("-----------------------------------------")[0]
-                                        body = body.split("=========================================")[1]
-                                        fandom = body.split("Fandom: ")[1]
-                                        fandom = fandom.split("Rating:")[0]
-                                        fandom = fandom.replace("\r","").strip("\n")
-                                        fandom = fandom.replace(", and ", ",").split(",")
-                                        # print(fandom)
-                                        for h in range(len(fandom)):
-                                        #print(fandom)
-                                            fandoms.append(fandom[h].lstrip(" and "))
-                                        count += 1
-                                        bar.text = fandom[0]
-
-                                        # if count % 100 == 0:
-                                        #     bar.update(count)
-                                    except:
-                                        print(body)
-                                        pass
-                        else:
+        # fetch the email message by ID
+        res, msg = imap.fetch(str(i), "BODY.PEEK[]")
+        for response in msg:
+            if isinstance(response, tuple):
+                # parse a bytes email into a message object
+                msg = email.message_from_bytes(response[1])
+                # decode the email subject
+                subject, encoding = decode_header(msg["Subject"])[0]
+                if isinstance(subject, bytes):
+                    # if it's a bytes, decode to str
+                    subject = subject.decode(encoding)
+                # decode email sender
+                From, encoding = decode_header(msg.get("From"))[0]
+                if isinstance(From, bytes):
+                    From = From.decode(encoding)
+                # print("Subject:", subject)
+                # print("From:", From)
+                # if the email message is multipart
+                if From == "Archive of Our Own <do-not-reply@archiveofourown.org>":
+                    if msg.is_multipart():
+                        # iterate over email parts
+                        for part in msg.walk():
                             # extract content type of email
-                            content_type = msg.get_content_type()
-                            # get the email body
-                            body = msg.get_payload(decode=True).decode()
-                            if content_type == "text/plain":
-                                # print only text email parts
-                                print(body)
-
-                    bar()
+                            content_type = part.get_content_type()
+                            content_disposition = str(part.get("Content-Disposition"))
+                            try:
+                                # get the email body
+                                body = part.get_payload(decode=True).decode()
+                            except:
+                                pass
+                            if content_type == "text/plain" and "attachment" not in content_disposition:
+                                # print text/plain emails and skip attachments
+                                try:
+                                    body = body.split("-----------------------------------------")[0]
+                                    body = body.split("=========================================")[1]
+                                    fandom = body.split("Fandom: ")[1]
+                                    fandom = fandom.split("Rating:")[0]
+                                    fandom = fandom.replace("\r","").strip("\n")
+                                    fandom = fandom.replace(", and ", ",").split(",")
+                                    # print(fandom)
+                                    for h in range(len(fandom)):
+                                    #print(fandom)
+                                        fandoms.append(fandom[h].lstrip(" and "))
+                                    count += 1
+                                    if count % 100 == 0:
+                                        bar.update(count)
+                                except:
+                                    print(body)
+                                    pass
+                    else:
+                        # extract content type of email
+                        content_type = msg.get_content_type()
+                        # get the email body
+                        body = msg.get_payload(decode=True).decode()
+                        if content_type == "text/plain":
+                            # print only text email parts
+                            print(body)
 
     # close the connection and logout
     imap.close()
