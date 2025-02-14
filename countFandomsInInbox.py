@@ -24,7 +24,7 @@ def countFandomsInInbox(username, password):
     messages = int(messages[0])
     # number of top emails to fetch
     N = messages
-    N = 3000
+    # N = 3000
 
     # print(imap.list())
 
