@@ -3,6 +3,7 @@ import email
 from email.header import decode_header
 from alive_progress import alive_bar
 import sys
+import re
 
 
 def pickFolder(folders, message):
@@ -62,6 +63,13 @@ def sortCompletedFics(username, password):
                         ['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"'],
                         ['"Good Omens"','"Good Omens/Good Omens Finished"'],
                         ['"Danny Phantom"','"Danny Phantom/Danny Phantom Finished"']]
+    
+    longfics = [['"Star Wars/Star Wars Finished"', '"Star Wars/Star Wars Long"'],
+                ['"The Untamed/The Untamed Finished"', '"The Untamed/The Untamed Long"'],
+                ['"DC/JTTD Finished"', '"DC/DC Long"'],
+                ['"BNHA/Midoriya Izuku Finished"','"BNHA/BNHA Finished Long"'],
+                ['"Miraculous Ladybug/Miraculous Finished"', '"Miraculous Ladybug/Miraculous Longfics'],
+                ['"Danny Phantom/Danny Phantom Finished"', '"Danny Phantom/Danny Phantom Long"']]
     
     # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
     
@@ -124,10 +132,18 @@ def sortCompletedFics(username, password):
                                         try:
                                             # print(body.split("Chapters: ")[1].split("\nFandom:")[0])
                                             chapters = (body.split("Chapters: ")[1].split("\nFandom:")[0]).strip(" ").strip("\r").split("/")
+                                            words = re.findall(r"\((\d*?) words\)", body)
+                                            print(words)
                                             if chapters[0] == chapters[1]:
                                                 # print("Complete")
-                                                
-                                                imap.uid('MOVE', uid ,destinationFolder)
+                                                if int(words) > 20000:
+                                                    #longfic
+                                                    for l in range(len(longfics)):
+                                                        if longfics[l][0] == destinationFolder:
+
+                                                            imap.uid('MOVE', uid ,longfics[l][1])
+                                                else:
+                                                    imap.uid('MOVE', uid ,destinationFolder)
                                                 bar.text = subject
 
                                             else:

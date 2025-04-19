@@ -6,6 +6,7 @@ import progressbar
 import csv
 import datetime
 import sys
+import re
 # from keys import username, password
 
 def countFandomsInInbox(username, password):
@@ -17,6 +18,7 @@ def countFandomsInInbox(username, password):
     imap = imaplib.IMAP4_SSL(imap_server)
     # authenticate
     imap.login(username, password)
+    print("Logged In Successfully")
 
     status, messages = imap.select("INBOX")
 
@@ -90,6 +92,8 @@ def countFandomsInInbox(username, password):
                                     for h in range(len(fandom)):
                                     #print(fandom)
                                         fandoms.append(fandom[h].lstrip(" and "))
+
+
                                     count += 1
                                     if count % 100 == 0:
                                         bar.update(count)
