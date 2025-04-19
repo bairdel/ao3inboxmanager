@@ -73,6 +73,7 @@ def sortCompletedFics(username, password):
                 ['"Avatar the Last Airbender/ATLA finished"', '"Avatar the Last Airbender/ATLA Long"']]
     
     # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
+    longfics = [['"DC/JTTD Finished"', '"DC/DC Long"']]
     
 
     for k in range(len(longfics)):
@@ -136,7 +137,7 @@ def sortCompletedFics(username, password):
                                             words = re.findall(r"\((\d*?) words\)", body)
                                             # print(words)
                                                 # print("Complete")
-                                            if int(words[0]) > 20000:
+                                            if (int(words[0]) > 20000) and (chapters[0] == chapters[1]):
                                                 #longfic
 
                                                 imap.uid('MOVE', uid ,destinationFolder)

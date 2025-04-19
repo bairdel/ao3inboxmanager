@@ -71,7 +71,7 @@ def sortCompletedFics(username, password):
                 ['"Miraculous Ladybug/Miraculous Finished"', '"Miraculous Ladybug/Miraculous Longfics'],
                 ['"Danny Phantom/Danny Phantom Finished"', '"Danny Phantom/Danny Phantom Long"']]
     
-    # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
+    inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
     
 
     for k in range(len(inboxMovements)):
@@ -85,10 +85,10 @@ def sortCompletedFics(username, password):
         messages = int(messages[0])
 
         # number of top emails to fetch
-        if messages < 50:
+        if messages < 2000:
             N = messages
         else:
-            N = 50
+            N = 2000
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):
