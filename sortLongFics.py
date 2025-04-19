@@ -75,10 +75,10 @@ def sortCompletedFics(username, password):
     
 
     for k in range(len(longfics)):
-        inbox = inboxMovements[k][0]
+        inbox = longfics[k][0]
         status, messages = imap.select(mailbox=(inbox))
 
-        destinationFolder = inboxMovements[k][1]
+        destinationFolder = longfics[k][1]
 
 
     # total number of emails
