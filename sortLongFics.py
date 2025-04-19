@@ -73,7 +73,7 @@ def sortCompletedFics(username, password):
                 ['"Avatar the Last Airbender/ATLA finished"', '"Avatar the Last Airbender/ATLA Long"']]
     
     # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
-    longfics = [['"DC/JTTD Finished"', '"DC/DC Long"']]
+    # longfics = [['"DC/JTTD Finished"', '"DC/DC Long"']]
     
 
     for k in range(len(longfics)):
@@ -87,10 +87,10 @@ def sortCompletedFics(username, password):
         messages = int(messages[0])
 
         # number of top emails to fetch
-        if messages < 400:
+        if messages < 100:
             N = messages
         else:
-            N = 400
+            N = 100
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):

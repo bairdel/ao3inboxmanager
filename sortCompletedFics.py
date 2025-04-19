@@ -71,7 +71,7 @@ def sortCompletedFics(username, password):
                 ['"Miraculous Ladybug/Miraculous Finished"', '"Miraculous Ladybug/Miraculous Longfics'],
                 ['"Danny Phantom/Danny Phantom Finished"', '"Danny Phantom/Danny Phantom Long"']]
     
-    inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
+    # inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
     
 
     for k in range(len(inboxMovements)):
@@ -85,10 +85,10 @@ def sortCompletedFics(username, password):
         messages = int(messages[0])
 
         # number of top emails to fetch
-        if messages < 2000:
+        if messages < 50:
             N = messages
         else:
-            N = 2000
+            N = 50
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):
@@ -142,9 +142,10 @@ def sortCompletedFics(username, password):
                                                         if longfics[l][0] == destinationFolder:
 
                                                             imap.uid('MOVE', uid ,longfics[l][1])
-                                                            print("words " + words[0] + " moved to " + longfics[l][1])
+                                                            print(f"words {words[0]} moved to {longfics[l][1]}")
                                                 else:
                                                     imap.uid('MOVE', uid ,destinationFolder)
+                                                    print(f"chapters {chapters[0]}/{chapters[1]} moved to {destinationFolder}")
                                                 bar.text = subject
 
                                             else:
