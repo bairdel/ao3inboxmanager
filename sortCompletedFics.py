@@ -133,15 +133,16 @@ def sortCompletedFics(username, password):
                                             # print(body.split("Chapters: ")[1].split("\nFandom:")[0])
                                             chapters = (body.split("Chapters: ")[1].split("\nFandom:")[0]).strip(" ").strip("\r").split("/")
                                             words = re.findall(r"\((\d*?) words\)", body)
-                                            print(words)
+                                            # print(words)
                                             if chapters[0] == chapters[1]:
                                                 # print("Complete")
-                                                if int(words) > 20000:
+                                                if int(words[0]) > 20000:
                                                     #longfic
                                                     for l in range(len(longfics)):
                                                         if longfics[l][0] == destinationFolder:
 
                                                             imap.uid('MOVE', uid ,longfics[l][1])
+                                                            print("words " + words[0] + " moved to " + longfics[l][1])
                                                 else:
                                                     imap.uid('MOVE', uid ,destinationFolder)
                                                 bar.text = subject
