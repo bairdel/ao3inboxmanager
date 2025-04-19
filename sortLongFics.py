@@ -68,8 +68,9 @@ def sortCompletedFics(username, password):
                 ['"The Untamed/The Untamed Finished"', '"The Untamed/The Untamed Long"'],
                 ['"DC/JTTD Finished"', '"DC/DC Long"'],
                 ['"BNHA/Midoriya Izuku Finished"','"BNHA/BNHA Finished Long"'],
-                ['"Miraculous Ladybug/Miraculous Finished"', '"Miraculous Ladybug/Miraculous Longfics'],
-                ['"Danny Phantom/Danny Phantom Finished"', '"Danny Phantom/Danny Phantom Long"']]
+                ['"Miraculous Ladybug/Miraculous Finished"', '"Miraculous Ladybug/Miraculous Longfics"'],
+                ['"Danny Phantom/Danny Phantom Finished"', '"Danny Phantom/Danny Phantom Long"'],
+                ['"Avatar the Last Airbender/ATLA finished"', '"Avatar the Last Airbender/ATLA Long"']]
     
     # inboxMovements = [['"DSMP/DSMP WIPs"','"DSMP/DSMP Finished"']]
     
@@ -85,10 +86,10 @@ def sortCompletedFics(username, password):
         messages = int(messages[0])
 
         # number of top emails to fetch
-        if messages < 50:
+        if messages < 400:
             N = messages
         else:
-            N = 50
+            N = 400
 
         with alive_bar(N, title=(inbox + " finished fics into " + destinationFolder)) as bar:
             for i in range(messages, messages-N, -1):
