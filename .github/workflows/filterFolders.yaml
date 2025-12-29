@@ -15,6 +15,7 @@ jobs:
           with:
             packages: |
               alive_progress
+              regex
         - name: runfile
           env:
             USERNAME: ${{ secrets.USERNAME }}
