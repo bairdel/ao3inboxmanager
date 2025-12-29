@@ -5,7 +5,8 @@ from alive_progress import alive_bar
 import sys
 import re
 import regex
-# from keys import username, password
+from keys import username, password
+from time import sleep
 
 debug = False
 numMessages = 50
@@ -68,9 +69,10 @@ def pickFolder(folders, message):
         
     # inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
     
-inboxes = [{'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Airbender/ATLA WIPs"', '3k': '"Avatar the Last Airbender/ATLA 3K"', '20k':'"Avatar the Last Airbender/ATLA 20K"'},
-            {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"BNHA/Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
-            {'base': '"Danny Phantom"', 'wips': '"Danny Phantom"', '3k': '"Danny Phantom/Danny Phantom 3K"', '20k':'"Danny Phantom/Danny Phantom 20K"'},
+inboxes = [
+    # {'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Airbender/ATLA WIPs"', '3k': '"Avatar the Last Airbender/ATLA 3K"', '20k':'"Avatar the Last Airbender/ATLA 20K"'},
+            # {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"BNHA/Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
+            # {'base': '"Danny Phantom"', 'wips': '"Danny Phantom"', '3k': '"Danny Phantom/Danny Phantom 3K"', '20k':'"Danny Phantom/Danny Phantom 20K"'},
             {'base': '"DC/Jason Todd, Tim Drake"', 'wips': '"DC/Jason Todd, Tim Drake"', '3k': '"DC/JTTD 3K"', '20k':'"DC/DC 20K"'},
             {'base': '"DSMP"', 'wips': '"DSMP/DSMP WIPs"', '3k': '"DSMP/DSMP 3K"', '20k':'"DSMP/DSMP 3K"'},
             {'base': '"Good Omens"', 'wips': '"Good Omens"', '3k': '"Good Omens/Good Omens 3K"', '20k':'"Good Omens/Good Omens 20K"'},
@@ -87,7 +89,11 @@ inboxes = [{'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Air
 
 
 def sortEmail(imap, inbox, folders, numMessages):
-    status, messages = imap.select(mailbox=(inbox))
+    try:
+        status, messages = imap.select(mailbox=(inbox))
+    except imaplib.IMAP4.abort as e:
+        print(e)
+        sleep(500)
     messages = int(messages[0])
 
     if messages < numMessages:
@@ -104,7 +110,11 @@ def sortEmail(imap, inbox, folders, numMessages):
             first = False
 
             # fetch the email message by ID
-            res, msg = imap.fetch(str(i), "BODY.PEEK[]")
+            try:
+                res, msg = imap.fetch(str(i), "BODY.PEEK[]")
+            except imaplib.IMAP4.abort as e:
+                print(e)
+                sleep(500)
             for response in msg:
                 if isinstance(response, tuple):
                     uid = response[0].decode('utf-8')
@@ -212,12 +222,10 @@ def sortCompletedFics(username, password):
 
     imap_server = "imap.mail.yahoo.com"
     # create an IMAP4 class with SSL 
-    imap = imaplib.IMAP4_SSL(imap_server)
 
     # print(username)
     # print(password)
     # authenticate
-    imap.login(username, password)
 
     ######## manual options
 
@@ -233,6 +241,9 @@ def sortCompletedFics(username, password):
     # N = messages
 
     for k in range(len(inboxes)):
+        imap = imaplib.IMAP4_SSL(imap_server)
+        imap.login(username, password)
+
         inbox = inboxes[k]['base']
         sortEmail(imap, inbox, inboxes[k], numMessages)
         inbox = inboxes[k]['wips']
@@ -240,15 +251,16 @@ def sortCompletedFics(username, password):
         inbox = inboxes[k]['3k']
         sortEmail(imap, inbox, inboxes[k], numMessages)
 
-    # close the connection an   d logout
-    imap.close()
-    imap.logout()
+        # close the connection an   d logout
+        imap.close()
+        imap.logout()
+        sleep(30)
 
 
 # if __name__ == "__main__":
 #     from keys import username, password
 #     sortCompletedFics(username, password)
     
-# sortCompletedFics(username, password)
+sortCompletedFics(username, password)
 
 sortCompletedFics(sys.argv[1], sys.argv[2])
