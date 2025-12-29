@@ -5,7 +5,7 @@ from alive_progress import alive_bar
 import sys
 import re
 import regex
-from keys import username, password
+# from keys import username, password
 
 debug = False
 numMessages = 400
@@ -249,6 +249,6 @@ def sortCompletedFics(username, password):
 #     from keys import username, password
 #     sortCompletedFics(username, password)
     
-sortCompletedFics(username, password)
+# sortCompletedFics(username, password)
 
 sortCompletedFics(sys.argv[1], sys.argv[2])
