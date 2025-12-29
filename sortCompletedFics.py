@@ -5,7 +5,7 @@ from alive_progress import alive_bar
 import sys
 import re
 import regex
-from keys import username, password
+# from keys import username, password
 from time import sleep
 
 debug = False
@@ -19,60 +19,11 @@ def pickFolder(folders, message):
     ind = int(input("\n" + message + ": ")) - 1
     return '"' + str(folders[ind]) + '"'
 
-
-
-
-
-    # inboxMovements = [
-    #     ['"Avatar the Last Airbender"','"Avatar the Last Airbender/ATLA 3K"'],
-    #                     ['"Avatar the Last Airbender/ATLA WIPs"','"Avatar the Last Airbender/ATLA 3K"'],
-    #                     ['"Star Wars"','"Star Wars/Star Wars 3K"'],
-    #                     ['"Star Wars/Star Wars WIPs"','"Star Wars/Star Wars 3K"'],
-    #                     ['"The Murderbot Diaries"','"The Murderbot Diaries/The Murderbot Diaries 3K"'],
-    #                     ['"Percy Jackson/PJO WIPs"','"Percy Jackson"'],
-    #                     ['"Miraculous Ladybug"','"Miraculous Ladybug/Miraculous 3K"'],
-    #                     ['"Miraculous Ladybug/Miraculous WIPs"','"Miraculous Ladybug/Miraculous 3K"'],
-    #                     ['"Harry Potter/Harry Potter WIPs"','"Harry Potter/HP 3K"'],
-    #                     ['"Harry Potter"','"Harry Potter/HP 3K"'],
-    #                     ['"BNHA/Midoriya Izuku"','"BNHA/Midoriya Izuku 3K"'],
-    #                     ['"BNHA/Midoriya Izuku WIPs"','"BNHA/Midoriya Izuku 3K"'],
-    #                     ['"BNHA"','"BNHA/BNHA 3K"'],
-    #                     ['"BNHA/BNHA WIPs"','"BNHA/BNHA 3K"'],
-    #                     ['"Merlin/Merlin WIPs"','"Merlin"'],
-    #                     ['"The Untamed"','"The Untamed/The Untamed 3K"'],
-    #                     ['"The Untamed/Untamed WIPs"','"The Untamed/The Untamed 3K"'],
-    #                     ['"Others"','"Others/Others 3K"'],
-    #                     ['"DC/Jason Todd, Tim Drake"','"DC/JTTD 3K"'],
-    #                     ['"DC/DC WIPs"','"DC/DC 3K"'],
-    #                     ['"DC"','"DC/DC 3K"'],
-    #                     ['"Marvel"','"Marvel/Marvel 3K"'],
-    #                     ['"Marvel/Marvel WIPs"','"Marvel/Marvel 3K"'],
-    #                     ['"DSMP"','"DSMP/DSMP 3K"'],
-    #                     ['"DSMP/DSMP WIPs"','"DSMP/DSMP 3K"'],
-    #                     ['"Good Omens"','"Good Omens/Good Omens 3K"'],
-    #                     ['"Danny Phantom"','"Danny Phantom/Danny Phantom 3K"']]
-    
-    # longfics = [['"Star Wars/Star Wars 3K"', '"Star Wars/Star Wars 20K"'],
-    #             ['"The Untamed/The Untamed 3K"', '"The Untamed/The Untamed 20K"'],
-    #             ['"DC/JTTD 3K"', '"DC/DC 20K"'],
-    #             ['"DC/DC 3K"', '"DC/DC 20K"'],
-    #             ['"BNHA/Midoriya Izuku 3K"','"BNHA/BNHA 20K"'],
-    #             ['"BNHA/BNHA 3K"','"BNHA/BNHA 20K"'],
-    #             ['"Miraculous Ladybug/Miraculous 3K"', '"Miraculous Ladybug/Miraculous 20K"'],
-    #             ['"Danny Phantom/Danny Phantom 3K"', '"Danny Phantom/Danny Phantom 20K"'],
-    #             ['"Avatar the Last Airbender/ATLA 3K"', '"Avatar the Last Airbender/ATLA 20K"'],
-    #             ['"Harry Potter/HP 3K"','"Harry Potter/HP 20K"'],
-    #             ['"The Murderbot Diaries/The Murderbot Diaries 3K"','"The Murderbot Diaries/The Murderbot Diaries 20K"'],
-    #             ['"Danny Phantom/Danny Phantom 3K"','"Danny Phantom/Danny Phantom 20K"'],
-    #             ['"Good Omens/Good Omens 3K"','"Good Omens/Good Omens 20K"'],
-    #             ['"Marvel/Marvel 3K"','"Marvel/Marvel 20K"']]
-        
-    # inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
     
 inboxes = [
-    # {'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Airbender/ATLA WIPs"', '3k': '"Avatar the Last Airbender/ATLA 3K"', '20k':'"Avatar the Last Airbender/ATLA 20K"'},
-            # {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"BNHA/Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
-            # {'base': '"Danny Phantom"', 'wips': '"Danny Phantom"', '3k': '"Danny Phantom/Danny Phantom 3K"', '20k':'"Danny Phantom/Danny Phantom 20K"'},
+    {'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Airbender/ATLA WIPs"', '3k': '"Avatar the Last Airbender/ATLA 3K"', '20k':'"Avatar the Last Airbender/ATLA 20K"'},
+            {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"BNHA/Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
+            {'base': '"Danny Phantom"', 'wips': '"Danny Phantom"', '3k': '"Danny Phantom/Danny Phantom 3K"', '20k':'"Danny Phantom/Danny Phantom 20K"'},
             {'base': '"DC/Jason Todd, Tim Drake"', 'wips': '"DC/Jason Todd, Tim Drake"', '3k': '"DC/JTTD 3K"', '20k':'"DC/DC 20K"'},
             {'base': '"DSMP"', 'wips': '"DSMP/DSMP WIPs"', '3k': '"DSMP/DSMP 3K"', '20k':'"DSMP/DSMP 3K"'},
             {'base': '"Good Omens"', 'wips': '"Good Omens"', '3k': '"Good Omens/Good Omens 3K"', '20k':'"Good Omens/Good Omens 20K"'},
@@ -261,6 +212,6 @@ def sortCompletedFics(username, password):
 #     from keys import username, password
 #     sortCompletedFics(username, password)
     
-sortCompletedFics(username, password)
+# sortCompletedFics(username, password)
 
 sortCompletedFics(sys.argv[1], sys.argv[2])
