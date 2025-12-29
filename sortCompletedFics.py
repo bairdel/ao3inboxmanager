@@ -8,7 +8,7 @@ import regex
 # from keys import username, password
 
 debug = False
-numMessages = 400
+numMessages = 50
 
 
 def pickFolder(folders, message):
@@ -69,7 +69,7 @@ def pickFolder(folders, message):
     # inboxMovements = [['"DC/Jason Todd, Tim Drake"','"DC/JTTD Finished"']]
     
 inboxes = [{'base': '"Avatar the Last Airbender"', 'wips': '"Avatar the Last Airbender/ATLA WIPs"', '3k': '"Avatar the Last Airbender/ATLA 3K"', '20k':'"Avatar the Last Airbender/ATLA 20K"'},
-            {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
+            {'base': '"BNHA/Midoriya Izuku"', 'wips': '"BNHA/Midoriya Izuku WIPs"', '3k': '"BNHA/Midoriya Izuku 3K"', '20k':'"BNHA/BNHA 20K"'},
             {'base': '"Danny Phantom"', 'wips': '"Danny Phantom"', '3k': '"Danny Phantom/Danny Phantom 3K"', '20k':'"Danny Phantom/Danny Phantom 20K"'},
             {'base': '"DC/Jason Todd, Tim Drake"', 'wips': '"DC/Jason Todd, Tim Drake"', '3k': '"DC/JTTD 3K"', '20k':'"DC/DC 20K"'},
             {'base': '"DSMP"', 'wips': '"DSMP/DSMP WIPs"', '3k': '"DSMP/DSMP 3K"', '20k':'"DSMP/DSMP 3K"'},
